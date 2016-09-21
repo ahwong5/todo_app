@@ -1,14 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.Description %>
-</p>
+<table class="table table-hover">
 
-<p>
-  <strong>Complete:</strong>
-  <%= @task.Complete %>
-</p>
+<tbody>
+<tr>
+  <td>Description:</td>
+  <td>Completed ?</td>
+  <td></td>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
+</tr>
+
+<tr>
+  <td><%= @task.Description %></td>
+  <td><%= @task.Complete %></td>
+  <td><%= link_to 'Edit', edit_task_path(@task), class: "btn btn-warning"  %></td>
+</tr>
+
+
+
+</tbody>
+
+
+
+</table>
 <%= link_to 'Back', tasks_path %>
