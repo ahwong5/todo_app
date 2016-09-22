@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Description</th>
-      <th>Completed ?</th>
+      <!-- <th>Completed ?</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,7 +18,13 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.Description %></td>
-        <td><%= task.Complete %></td>
+        <!-- <td><%= task.Complete %></td> -->
+        <% if task.Complete? %>
+        <td><%= link_to complete_link_text(task), toggle_complete_task_path(task), :id => "complete_link_#{task.id}", class: "btn btn-success" %></td>
+        <% else %>
+        <td><%= link_to complete_link_text(task), toggle_complete_task_path(task), :id => "complete_link_#{task.id}", class: "btn btn-primary" %></td>
+
+        <% end %>
         <td><%= link_to 'Show', task, class: "btn btn-success" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-warning" %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

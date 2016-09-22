@@ -1,12 +1,18 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy]
-  before_filter :check_user, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
+  before_filter :authenticate_user!, only: [:index, :new, :create, :edit, :update, :destroy, :toggle_complete]
+  # before_filter :check_user, only: [:edit, :update, :destroy]
 
+  def toggle_complete
+    @a = Task.find(params[:id])
+    @a.toggle!(:Complete)
+    redirect_to root_path
+    flash[:notice] = "Successfully updated task"
+  end
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.where(user: current_user)
+    @tasks = Task.where(user: current_user).order("created_at DESC")
   end
 
   # GET /tasks/1
